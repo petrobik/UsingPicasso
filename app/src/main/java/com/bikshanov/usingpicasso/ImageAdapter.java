@@ -12,7 +12,6 @@ import com.squareup.picasso.Picasso;
 public class ImageAdapter extends BaseAdapter {
 
     private Context context;
-    private LayoutInflater inflater;
 
     public String[] imageUrls = {
             "https://cdn.gratisography.com/photos/437H.jpg",
@@ -30,7 +29,7 @@ public class ImageAdapter extends BaseAdapter {
     public ImageAdapter(Context context) {
         this.context = context;
 
-        inflater = LayoutInflater.from(context);
+//        inflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -50,7 +49,10 @@ public class ImageAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        view = inflater.inflate(R.layout.gridview_item, viewGroup, false);
+        if (view == null) {
+            LayoutInflater inflater = LayoutInflater.from(context);
+            view = inflater.inflate(R.layout.gridview_item, viewGroup, false);
+        }
 
         Picasso.get()
                 .load(imageUrls[i]).
